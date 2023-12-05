@@ -92,10 +92,7 @@ jobs:
     needs:
       [version, core-unit-test, core-integration-test, lint, container, e2e]
     if: ${{ needs.version.outputs.published == 'true' && github.event_name == 'workflow_dispatch' }}
-    secrets:
-      GCR_JSON_KEY_BASE64: ${{ secrets.GCR_JSON_KEY_BASE64 }}
     with:
       build_image_name: ${{ needs.container.outputs.build_image }}
       semantic_version: "19.0.2"
       image_name: "ghcr.io/zitadel/zitadel"
-      google_image_name: "europe-docker.pkg.dev/zitadel-common/zitadel-repo/zitadel"
