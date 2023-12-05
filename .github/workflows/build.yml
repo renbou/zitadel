@@ -76,7 +76,7 @@ jobs:
       packages: write
     if: ${{ github.event_name == 'workflow_dispatch' }}
     with:
-      build_image_name: "ghcr.io/zitadel/zitadel-build"
+      build_image_name: "ghcr.io/renbou/zitadel-build"
 
   e2e:
     uses: ./.github/workflows/e2e.yml
@@ -95,4 +95,4 @@ jobs:
     with:
       build_image_name: ${{ needs.container.outputs.build_image }}
       semantic_version: "19.0.2"
-      image_name: "ghcr.io/zitadel/zitadel"
+      image_name: "ghcr.io/renbou/zitadel"
