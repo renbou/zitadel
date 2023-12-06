@@ -1,3 +1,1 @@
 CREATE SCHEMA IF NOT EXISTS projections;
-
-GRANT ALL ON ALL TABLES IN SCHEMA projections TO "%[1]s";
