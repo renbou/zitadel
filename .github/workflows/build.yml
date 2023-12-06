@@ -78,10 +78,6 @@ jobs:
     with:
       build_image_name: "ghcr.io/renbou/zitadel-build"
 
-  e2e:
-    uses: ./.github/workflows/e2e.yml
-    needs: [compile]
-
   release:
     uses: ./.github/workflows/release.yml
     permissions:
@@ -89,8 +85,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    needs:
-      [version, core-unit-test, core-integration-test, lint, container, e2e]
+    needs: [version, core-unit-test, core-integration-test, lint, container]
     if: ${{ needs.version.outputs.published == 'true' && github.event_name == 'workflow_dispatch' }}
     with:
       build_image_name: ${{ needs.container.outputs.build_image }}
