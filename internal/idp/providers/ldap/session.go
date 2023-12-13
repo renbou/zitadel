@@ -12,12 +12,15 @@ import (
 	"github.com/go-ldap/ldap/v3"
 	"golang.org/x/text/language"
 
+	"github.com/zitadel/logging"
 	"github.com/zitadel/zitadel/internal/domain"
 	"github.com/zitadel/zitadel/internal/idp"
 )
 
-var ErrNoSingleUser = errors.New("user does not exist or too many entries returned")
-var ErrFailedLogin = errors.New("user failed to login")
+var (
+	ErrNoSingleUser = errors.New("user does not exist or too many entries returned")
+	ErrFailedLogin  = errors.New("user failed to login")
+)
 
 var _ idp.Session = (*Session)(nil)
 
@@ -171,6 +174,7 @@ func trySearchAndUserBind(
 	if err != nil {
 		return nil, err
 	}
+	logging.Infof("ldap search result for query %s: entries=%+v err=%v", searchQuery, sr, err)
 	if len(sr.Entries) != 1 {
 		return nil, ErrNoSingleUser
 	}
