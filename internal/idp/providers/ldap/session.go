@@ -247,14 +247,17 @@ func mapLDAPEntryToUser(
 	avatarURLAttribute,
 	profileAttribute string,
 ) (_ *User, err error) {
-	emailVerified := true
-	_ = emailVerifiedAttribute
-	// if v := user.GetAttributeValue(emailVerifiedAttribute); v != "" {
-	// 	emailVerified, err = strconv.ParseBool(v)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// }
+	var emailVerified bool
+	if emailVerifiedAttribute != "" {
+		if v := user.GetAttributeValue(emailVerifiedAttribute); v != "" {
+			emailVerified, err = strconv.ParseBool(v)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		emailVerified = true
+	}
 	var phoneVerified bool
 	if v := user.GetAttributeValue(phoneVerifiedAttribute); v != "" {
 		phoneVerified, err = strconv.ParseBool(v)
