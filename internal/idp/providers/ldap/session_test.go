@@ -226,7 +226,7 @@ func TestProvider_mapLDAPEntryToUser(t *testing.T) {
 					NickName:          "",
 					PreferredUsername: "",
 					Email:             "",
-					EmailVerified:     false,
+					EmailVerified:     true,
 					Phone:             "",
 					PhoneVerified:     false,
 					PreferredLanguage: language.Tag{},
